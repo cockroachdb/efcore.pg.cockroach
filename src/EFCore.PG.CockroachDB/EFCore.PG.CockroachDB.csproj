@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>Npgsql.EntityFrameworkCore.CockroachDB</AssemblyName>
+        <RootNamespace>Npgsql.EntityFrameworkCore.CockroachDB</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0-rc.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Internal\" />
+    </ItemGroup>
+</Project>

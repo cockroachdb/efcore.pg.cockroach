@@ -1,0 +1,8 @@
+<Project>
+    <PropertyGroup>
+        <EFCorePGVersion>8.0.0-rc.2</EFCorePGVersion>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(EFCorePGVersion)" />
+    </ItemGroup>
+</Project>

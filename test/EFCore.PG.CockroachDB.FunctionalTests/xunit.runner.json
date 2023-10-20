@@ -1,0 +1,5 @@
+﻿{
+  "appDomain": "denied",
+  "longRunningTestSeconds": 120,
+  "maxParallelThreads": -1
+}
