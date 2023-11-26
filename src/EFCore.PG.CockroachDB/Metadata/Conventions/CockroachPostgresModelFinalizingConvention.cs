@@ -6,8 +6,15 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal;
 
 namespace Npgsql.EntityFrameworkCore.CockroachDB.Metadata.Conventions;
 
+/// <summary>
+/// 
+/// </summary>
 public class CockroachPostgresModelFinalizingConvention : NpgsqlPostgresModelFinalizingConvention
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="typeMappingSource"></param>
     public CockroachPostgresModelFinalizingConvention(IRelationalTypeMappingSource typeMappingSource) : base(typeMappingSource)
     {
     }

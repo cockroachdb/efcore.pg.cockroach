@@ -6,11 +6,21 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata.Conventions;
 
 namespace Npgsql.EntityFrameworkCore.CockroachDB.Metadata.Conventions;
 
+/// <summary>
+/// 
+/// </summary>
 public class CockroachConventionSetBuilder : NpgsqlConventionSetBuilder
 {
     private readonly IRelationalTypeMappingSource _typeMappingSource;
     private readonly Version _postgresVersion;
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="dependencies"></param>
+    /// <param name="relationalDependencies"></param>
+    /// <param name="typeMappingSource"></param>
+    /// <param name="npgsqlSingletonOptions"></param>
     public CockroachConventionSetBuilder(ProviderConventionSetBuilderDependencies dependencies, RelationalConventionSetBuilderDependencies relationalDependencies, IRelationalTypeMappingSource typeMappingSource, INpgsqlSingletonOptions npgsqlSingletonOptions) : base(dependencies, relationalDependencies, typeMappingSource, npgsqlSingletonOptions)
     {
         _typeMappingSource = typeMappingSource;

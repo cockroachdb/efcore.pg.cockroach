@@ -5,15 +5,29 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal;
 
 namespace Npgsql.EntityFrameworkCore.CockroachDB.Storage.Internal;
 
+/// <summary>
+/// 
+/// </summary>
 public class CockroachDatabaseCreator : NpgsqlDatabaseCreator
 {
     private readonly INpgsqlRelationalConnection _connection;
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="dependencies"></param>
+    /// <param name="connection"></param>
+    /// <param name="rawSqlCommandBuilder"></param>
     public CockroachDatabaseCreator(RelationalDatabaseCreatorDependencies dependencies, INpgsqlRelationalConnection connection, IRawSqlCommandBuilder rawSqlCommandBuilder) : base(dependencies, connection, rawSqlCommandBuilder)
     {
         _connection = connection;
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public override Task<bool> ExistsAsync(CancellationToken cancellationToken = default)
         => Exists(async: true, cancellationToken);
 

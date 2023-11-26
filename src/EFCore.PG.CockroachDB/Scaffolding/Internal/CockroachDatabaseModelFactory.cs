@@ -20,6 +20,9 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Scaffolding.Internal;
 
 namespace Npgsql.EntityFrameworkCore.CockroachDB.Scaffolding.Internal;
 
+/// <summary>
+/// 
+/// </summary>
 public class CockroachDatabaseModelFactory : NpgsqlDatabaseModelFactory
 {
     #region Fields
@@ -52,6 +55,10 @@ public class CockroachDatabaseModelFactory : NpgsqlDatabaseModelFactory
             RegexOptions.Compiled,
             TimeSpan.FromMilliseconds(1000.0));
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="logger"></param>
     public CockroachDatabaseModelFactory(IDiagnosticsLogger<DbLoggerCategory.Scaffolding> logger) : base(logger)
     {
         _logger = logger;
