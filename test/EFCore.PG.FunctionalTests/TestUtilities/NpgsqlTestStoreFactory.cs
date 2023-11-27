@@ -21,5 +21,5 @@ public class NpgsqlTestStoreFactory : RelationalTestStoreFactory
         => NpgsqlTestStore.GetOrCreate(storeName, connectionStringOptions: _connectionStringOptions);
 
     public override IServiceCollection AddProviderServices(IServiceCollection serviceCollection)
-        => serviceCollection.AddEntityFrameworkNpgsql();
+        => serviceCollection.AddEntityFrameworkNpgsql().AddEntityFrameworkCockroach();
 }

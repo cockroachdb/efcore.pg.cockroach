@@ -214,6 +214,7 @@ public class NpgsqlTestStore : RelationalTestStore
             .UseInternalServiceProvider(
                 new ServiceCollection()
                     .AddEntityFrameworkNpgsql()
+                    .AddEntityFrameworkCockroach()
                     .BuildServiceProvider())
             .Options;
 

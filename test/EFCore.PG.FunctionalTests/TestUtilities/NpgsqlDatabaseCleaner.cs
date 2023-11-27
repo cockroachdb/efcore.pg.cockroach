@@ -36,6 +36,7 @@ public class NpgsqlDatabaseCleaner : RelationalDatabaseCleaner
         // and all tables that depend on it (CASCADE) before the database model is built.
         var creator = facade.GetService<IRelationalDatabaseCreator>();
         var connection = facade.GetService<IRelationalConnection>();
+        
         if (creator.Exists())
         {
             connection.Open();
@@ -43,7 +44,6 @@ public class NpgsqlDatabaseCleaner : RelationalDatabaseCleaner
             {
                 var conn = (NpgsqlConnection)connection.DbConnection;
                 DropExtensions(conn);
-                DropTypes(conn);
                 DropFunctions(conn);
                 DropCollations(conn);
             }
@@ -54,6 +54,20 @@ public class NpgsqlDatabaseCleaner : RelationalDatabaseCleaner
         }
 
         base.Clean(facade);
+
+        if (creator.Exists())
+        {
+            connection.Open();
+            try
+            {
+                var conn = (NpgsqlConnection)connection.DbConnection;
+                DropTypes(conn);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 
     private void DropExtensions(NpgsqlConnection conn)
@@ -111,7 +125,7 @@ WHERE typtype IN ('r', 'e') AND nspname <> 'pg_catalog'";
 SELECT 'DROP ROUTINE ""' || nspname || '"".""' || proname || '""(' || oidvectortypes(proargtypes) || ');' FROM pg_proc
 JOIN pg_namespace AS ns ON ns.oid = pg_proc.pronamespace
 WHERE
-        nspname NOT IN ('pg_catalog', 'information_schema') AND
+        nspname NOT IN ('pg_catalog', 'information_schema', 'crdb_internal', 'pg_extension') AND
     NOT EXISTS (
             SELECT * FROM pg_depend AS dep
             WHERE dep.classid = (SELECT oid FROM pg_class WHERE relname = 'pg_proc') AND
@@ -174,6 +188,6 @@ FROM pg_collation coll
             .Select(e => _sqlGenerationHelper.DelimitIdentifier(e.Name, e.Schema))
             .Aggregate(
                 new StringBuilder(),
-                (builder, s) => builder.Append("DROP TYPE ").Append(s).Append(" CASCADE;"),
+                (builder, s) => builder.Append("DROP TYPE ").Append(s).Append(";"),
                 builder => builder.ToString());
 }

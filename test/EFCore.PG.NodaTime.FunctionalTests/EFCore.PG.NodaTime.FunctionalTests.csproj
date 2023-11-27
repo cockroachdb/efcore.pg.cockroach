@@ -21,4 +21,8 @@
     <Using Include="NodaTime" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="LegacyNpgsqlNodaTimeTypeMappingTest.cs" />
+  </ItemGroup>
+
 </Project>

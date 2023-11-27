@@ -27,4 +27,8 @@
     <Compile Remove="Query\LegacyTimestampQueryTest.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\EFCore.PG.CockroachDB\EFCore.PG.CockroachDB.csproj" />
+  </ItemGroup>
+
 </Project>
