@@ -11,6 +11,7 @@ namespace Npgsql.EntityFrameworkCore.CockroachDB.Storage.Internal;
 public class CockroachDatabaseCreator : NpgsqlDatabaseCreator
 {
     private readonly INpgsqlRelationalConnection _connection;
+    private readonly IRawSqlCommandBuilder _rawSqlCommandBuilder;
     
     /// <summary>
     /// 
@@ -18,9 +19,13 @@ public class CockroachDatabaseCreator : NpgsqlDatabaseCreator
     /// <param name="dependencies"></param>
     /// <param name="connection"></param>
     /// <param name="rawSqlCommandBuilder"></param>
-    public CockroachDatabaseCreator(RelationalDatabaseCreatorDependencies dependencies, INpgsqlRelationalConnection connection, IRawSqlCommandBuilder rawSqlCommandBuilder) : base(dependencies, connection, rawSqlCommandBuilder)
+    public CockroachDatabaseCreator(
+        RelationalDatabaseCreatorDependencies dependencies, 
+        INpgsqlRelationalConnection connection, 
+        IRawSqlCommandBuilder rawSqlCommandBuilder) : base(dependencies, connection, rawSqlCommandBuilder)
     {
         _connection = connection;
+        _rawSqlCommandBuilder = rawSqlCommandBuilder;
     }
     
     /// <summary>
@@ -110,4 +115,66 @@ public class CockroachDatabaseCreator : NpgsqlDatabaseCreator
     
     // Login failed is thrown when database does not exist (See Issue #776)
     private static bool IsDoesNotExist(PostgresException exception) => exception.SqlState == "3D000";
+    
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    public override bool HasTables()
+        => Dependencies.ExecutionStrategy
+            .Execute(
+                _connection,
+                connection => (bool)CreateHasTablesCommand()
+                    .ExecuteScalar(
+                        new RelationalCommandParameterObject(
+                            connection,
+                            null,
+                            null,
+                            Dependencies.CurrentContext.Context,
+                            Dependencies.CommandLogger))!);
+    
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    public override Task<bool> HasTablesAsync(CancellationToken cancellationToken = default)
+        => Dependencies.ExecutionStrategy.ExecuteAsync(
+            _connection,
+            async (connection, ct) => (bool)(await CreateHasTablesCommand()
+                .ExecuteScalarAsync(
+                    new RelationalCommandParameterObject(
+                        connection,
+                        null,
+                        null,
+                        Dependencies.CurrentContext.Context,
+                        Dependencies.CommandLogger),
+                    cancellationToken: ct).ConfigureAwait(false))!, cancellationToken);
+
+    private IRelationalCommand CreateHasTablesCommand()
+        => _rawSqlCommandBuilder
+            .Build(
+                """
+                SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+                FROM pg_class AS cls
+                JOIN pg_namespace AS ns ON ns.oid = cls.relnamespace
+                WHERE
+                        cls.relkind IN ('r', 'v', 'm', 'f', 'p') AND
+                        ns.nspname NOT IN ('pg_catalog', 'information_schema', 'crdb_internal', 'pg_extension') AND
+                        -- Exclude tables which are members of PG extensions
+                        NOT EXISTS (
+                            SELECT 1 FROM pg_depend WHERE
+                                classid=(
+                                    SELECT cls.oid
+                                    FROM pg_class AS cls
+                                             JOIN pg_namespace AS ns ON ns.oid = cls.relnamespace
+                                    WHERE relname='pg_class' AND ns.nspname='pg_catalog'
+                                ) AND
+                                objid=cls.oid AND
+                                deptype IN ('e', 'x')
+                        )
+                """);
 }

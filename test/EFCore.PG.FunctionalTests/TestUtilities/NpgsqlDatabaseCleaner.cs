@@ -1,6 +1,7 @@
 ﻿using System.Data.Common;
 using System.Text;
 using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
+using Npgsql.EntityFrameworkCore.CockroachDB.Scaffolding.Internal;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Diagnostics.Internal;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Scaffolding.Internal;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal;
@@ -17,7 +18,7 @@ public class NpgsqlDatabaseCleaner : RelationalDatabaseCleaner
     }
 
     protected override IDatabaseModelFactory CreateDatabaseModelFactory(ILoggerFactory loggerFactory)
-        => new NpgsqlDatabaseModelFactory(
+        => new CockroachDatabaseModelFactory(
             new DiagnosticsLogger<DbLoggerCategory.Scaffolding>(
                 loggerFactory,
                 new LoggingOptions(),
