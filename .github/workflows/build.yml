@@ -1,0 +1,35 @@
+name: Build
+
+on: 
+  push:
+    branches:
+      - main
+  pull_request: 
+
+env:
+  dotnet_sdk_version: '8.0.100'
+  
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-22.04 ]
+        config: [ Release ]
+        include:
+          - os: ubuntu-22.04
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.dotnet_sdk_version }}
+          
+      - name: Build
+        run: dotnet build --configuration Debug
+        shell: bash
