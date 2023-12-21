@@ -17,6 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-22.04 ]
+        crdb_major: [ master ]
         config: [ Release ]
         include:
           - os: ubuntu-22.04
