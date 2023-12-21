@@ -1,3 +1,4 @@
+using Npgsql.EntityFrameworkCore.CockroachDB.Infrastructure;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 
 namespace Npgsql.EntityFrameworkCore.PostgreSQL.TestUtilities;

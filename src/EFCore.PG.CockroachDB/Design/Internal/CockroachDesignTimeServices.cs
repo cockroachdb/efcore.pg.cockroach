@@ -18,7 +18,6 @@ public class CockroachDesignTimeServices : NpgsqlDesignTimeServices
     {
         Check.NotNull(serviceCollection, nameof(serviceCollection));
 
-        serviceCollection.AddEntityFrameworkNpgsql();
         serviceCollection.AddEntityFrameworkCockroach();
         
         new EntityFrameworkRelationalDesignServicesBuilder(serviceCollection)

@@ -1,37 +1,27 @@
+using System.Data.Common;
+using Npgsql.EntityFrameworkCore.CockroachDB.Infrastructure;
 using Npgsql.EntityFrameworkCore.CockroachDB.Infrastructure.Internal;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal;
 
 namespace System.Reflection;
 
 /// <summary>
 /// 
 /// </summary>
-public static class CockroachDbContextOptionsBuilderExtensions
+public static class DbContextOptionsBuilderExtensions
 {
     /// <summary>
     /// 
     /// </summary>
     /// <param name="optionsBuilder"></param>
-    /// <param name="connectionString"></param>
-    /// <param name="npgsqlOptionsAction"></param>
     /// <returns></returns>
-    public static DbContextOptionsBuilder UseCockroach(
-        this DbContextOptionsBuilder optionsBuilder,
-        string? connectionString,
-        Action<NpgsqlDbContextOptionsBuilder>? npgsqlOptionsAction = null)
+    public static DbContextOptionsBuilder UseCockroach(this DbContextOptionsBuilder optionsBuilder)
     {
-        Check.NotNull(optionsBuilder, nameof(optionsBuilder));
-
-        var extension = (CockroachOptionsExtension)GetOrCreateExtension(optionsBuilder).WithConnectionString(connectionString);
+        var extension = new CockroachOptionsExtension();
+        
         ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(extension);
-
-        npgsqlOptionsAction?.Invoke(new NpgsqlDbContextOptionsBuilder(optionsBuilder));
-
+        
         return optionsBuilder;
     }
-    
-    private static CockroachOptionsExtension GetOrCreateExtension(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.Options.FindExtension<CockroachOptionsExtension>() is { } existing
-            ? new CockroachOptionsExtension(existing)
-            : new CockroachOptionsExtension();
 }

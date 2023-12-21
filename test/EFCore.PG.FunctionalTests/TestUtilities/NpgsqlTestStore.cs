@@ -109,7 +109,8 @@ public class NpgsqlTestStore : RelationalTestStore
                 .CommandTimeout(CommandTimeout)
                 // The tests are written with the assumption that NULLs are sorted first (SQL Server and .NET behavior), but PostgreSQL
                 // sorts NULLs last by default. This configures the provider to emit NULLS FIRST.
-                .ReverseNullOrdering());
+                .ReverseNullOrdering())
+            .UseCockroach();
 
     private static string GetScratchDbName()
     {

@@ -12,7 +12,7 @@ public class NpgsqlTestHelpers : RelationalTestHelpers
         => services.AddEntityFrameworkNpgsql().AddEntityFrameworkCockroach();
 
     public override DbContextOptionsBuilder UseProviderOptions(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql(new NpgsqlConnection("Host=localhost;Database=DummyDatabase"));
+        => optionsBuilder.UseNpgsql(new NpgsqlConnection("Host=localhost;Database=DummyDatabase")).UseCockroach();
 
     public override LoggingDefinitions LoggingDefinitions { get; } = new NpgsqlLoggingDefinitions();
 }

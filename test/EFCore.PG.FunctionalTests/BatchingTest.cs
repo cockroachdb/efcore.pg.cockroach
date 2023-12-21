@@ -214,18 +214,7 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
                 b =>
                 {
                     b.Property(e => e.Id).ValueGeneratedOnAdd();
-                    b.Property(e => e.Version)
-                        .HasColumnName("xmin")
-                        .HasColumnType("xid")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .IsConcurrencyToken();
                 });
-
-            modelBuilder.Entity<Blog>().Property(b => b.Version)
-                .HasColumnName("xmin")
-                .HasColumnType("xid")
-                .ValueGeneratedOnAddOrUpdate()
-                .IsConcurrencyToken();
         }
 
         // ReSharper disable once UnusedMember.Local
