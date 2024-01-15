@@ -571,6 +571,8 @@ WHERE p."Ints"[2] = 10
 """);
     }
 
+    [SkipForCockroachDb("CockroachDB doesn't support array slicing, https://github.com/cockroachdb/cockroach/issues/32551")]
+    [ConditionalTheory]
     public override async Task Column_collection_Skip(bool async)
     {
         await base.Column_collection_Skip(async);
@@ -583,6 +585,8 @@ WHERE cardinality(p."Ints"[2:]) = 2
 """);
     }
 
+    [SkipForCockroachDb("CockroachDB doesn't support array slicing, https://github.com/cockroachdb/cockroach/issues/32551")]
+    [ConditionalTheory]
     public override async Task Column_collection_Take(bool async)
     {
         await base.Column_collection_Take(async);
@@ -595,6 +599,8 @@ WHERE 11 = ANY (p."Ints"[:2])
 """);
     }
 
+    [SkipForCockroachDb("CockroachDB doesn't support array slicing, https://github.com/cockroachdb/cockroach/issues/32551")]
+    [ConditionalTheory]
     public override async Task Column_collection_Skip_Take(bool async)
     {
         await base.Column_collection_Skip_Take(async);
@@ -835,6 +841,8 @@ WHERE p."Ints" = @__ints_0
 """);
     }
 
+    [SkipForCockroachDb("CockroachDB doesn't support array slicing, https://github.com/cockroachdb/cockroach/issues/32551")]
+    [ConditionalTheory]
     public override async Task Column_collection_equality_inline_collection(bool async)
     {
         await base.Column_collection_equality_inline_collection(async);
@@ -867,6 +875,8 @@ WHERE p."Ints" = ARRAY[@__i_0,@__j_1]::integer[]
 """);
     }
 
+    [SkipForCockroachDb("CockroachDB doesn't support array slicing, https://github.com/cockroachdb/cockroach/issues/32551")]
+    [ConditionalTheory]
     public override async Task Parameter_collection_in_subquery_Union_column_collection_as_compiled_query(bool async)
     {
         await base.Parameter_collection_in_subquery_Union_column_collection_as_compiled_query(async);
@@ -946,6 +956,8 @@ WHERE (
 """);
     }
 
+    [SkipForCockroachDb("CockroachDB doesn't support array slicing, https://github.com/cockroachdb/cockroach/issues/32551")]
+    [ConditionalFact]
     public override void Parameter_collection_in_subquery_and_Convert_as_compiled_query()
     {
         base.Parameter_collection_in_subquery_and_Convert_as_compiled_query();
@@ -960,6 +972,8 @@ WHERE (
         AssertSql();
     }
 
+    [SkipForCockroachDb("CockroachDB doesn't support array slicing, https://github.com/cockroachdb/cockroach/issues/32551")]
+    [ConditionalTheory]
     public override async Task Parameter_collection_in_subquery_Count_as_compiled_query(bool async)
     {
         await base.Parameter_collection_in_subquery_Count_as_compiled_query(async);
@@ -977,6 +991,8 @@ WHERE (
 """);
     }
 
+    [SkipForCockroachDb("CockroachDB doesn't support array slicing, https://github.com/cockroachdb/cockroach/issues/32551")]
+    [ConditionalTheory]
     public override async Task Column_collection_in_subquery_Union_parameter_collection(bool async)
     {
         await base.Column_collection_in_subquery_Union_parameter_collection(async);
@@ -1041,6 +1057,7 @@ ORDER BY p."Id" NULLS FIRST
 """);
     }
 
+    [SkipForCockroachDb("CockroachDB doesn't support array slicing, https://github.com/cockroachdb/cockroach/issues/32551")]
     public override async Task Project_collection_of_nullable_ints_with_paging(bool async)
     {
         await base.Project_collection_of_nullable_ints_with_paging(async);
@@ -1072,6 +1089,7 @@ ORDER BY p."Id" NULLS FIRST, t.value NULLS FIRST
 """);
     }
 
+    [SkipForCockroachDb("CockroachDB doesn't support array slicing, https://github.com/cockroachdb/cockroach/issues/32551")]
     public override async Task Project_collection_of_nullable_ints_with_paging3(bool async)
     {
         await base.Project_collection_of_nullable_ints_with_paging3(async);

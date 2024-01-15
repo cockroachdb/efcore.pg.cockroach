@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Compile Remove="LegacyNpgsqlNodaTimeTypeMappingTest.cs" />
+    <Compile Remove="NodaTimeQueryNpgsqlTest.cs" />
   </ItemGroup>
 
 </Project>
