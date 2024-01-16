@@ -696,7 +696,8 @@ public class NpgsqlValueGenerationScenariosTest
                 .EnableServiceProviderCaching(false)
                 .UseNpgsql(
                     NpgsqlTestStore.CreateConnectionString(_databaseName),
-                    b => b.ApplyConfiguration());
+                    b => b.ApplyConfiguration())
+                .UseCockroach();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

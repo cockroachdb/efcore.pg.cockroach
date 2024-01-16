@@ -123,7 +123,7 @@ WHERE typtype IN ('r', 'e') AND nspname <> 'pg_catalog'";
     private void DropFunctions(NpgsqlConnection conn)
     {
         const string getUserDefinedFunctions = @"
-SELECT 'DROP ROUTINE ""' || nspname || '"".""' || proname || '""(' || oidvectortypes(proargtypes) || ');' FROM pg_proc
+SELECT 'DROP FUNCTION ""' || nspname || '"".""' || proname || '""(' || oidvectortypes(proargtypes) || ');' FROM pg_proc
 JOIN pg_namespace AS ns ON ns.oid = pg_proc.pronamespace
 WHERE
         nspname NOT IN ('pg_catalog', 'information_schema', 'crdb_internal', 'pg_extension') AND

@@ -217,6 +217,7 @@ public class NpgsqlTestStore : RelationalTestStore
                     .AddEntityFrameworkNpgsql()
                     .AddEntityFrameworkCockroach()
                     .BuildServiceProvider())
+            .UseCockroach()
             .Options;
 
         using (var context = new DbContext(options))
