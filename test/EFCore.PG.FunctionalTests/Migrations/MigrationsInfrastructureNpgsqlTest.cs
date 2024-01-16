@@ -163,6 +163,7 @@ namespace Npgsql.EntityFrameworkCore.PostgreSQL.Migrations
                                     .SetPostgresVersion(TestEnvironment.PostgresVersion)
                                     .ReverseNullOrdering()))
                     .UseInternalServiceProvider(CreateServiceProvider())
+                    .UseCockroach()
                     .Options;
                 return new MigrationsContext(options);
             }
@@ -170,6 +171,7 @@ namespace Npgsql.EntityFrameworkCore.PostgreSQL.Migrations
             private static IServiceProvider CreateServiceProvider()
                 => new ServiceCollection()
                     .AddEntityFrameworkNpgsql()
+                    .AddEntityFrameworkCockroach()
                     .BuildServiceProvider();
         }
     }
@@ -198,7 +200,7 @@ namespace ModelSnapshot22
     public class BloggingContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql(TestEnvironment.DefaultConnection);
+            => optionsBuilder.UseNpgsql(TestEnvironment.DefaultConnection).UseCockroach();
 
         public DbSet<Blog> Blogs { get; set; }
     }
