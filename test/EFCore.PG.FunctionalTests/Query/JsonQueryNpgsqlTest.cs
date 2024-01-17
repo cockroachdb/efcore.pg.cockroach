@@ -852,6 +852,7 @@ ORDER BY j."Id" NULLS FIRST
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_index_in_projection_nested(bool async)
     {
         await base.Json_collection_index_in_projection_nested(async);
@@ -865,6 +866,7 @@ FROM "JsonEntitiesBasic" AS j
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_index_in_projection_nested_project_scalar(bool async)
     {
         await base.Json_collection_index_in_projection_nested_project_scalar(async);
@@ -878,6 +880,7 @@ FROM "JsonEntitiesBasic" AS j
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_index_in_projection_nested_project_reference(bool async)
     {
         await base.Json_collection_index_in_projection_nested_project_reference(async);
@@ -891,6 +894,7 @@ FROM "JsonEntitiesBasic" AS j
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_index_in_projection_nested_project_collection(bool async)
     {
         await base.Json_collection_index_in_projection_nested_project_collection(async);
@@ -905,6 +909,7 @@ ORDER BY j."Id" NULLS FIRST
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_index_in_projection_nested_project_collection_anonymous_projection(bool async)
     {
         await base.Json_collection_index_in_projection_nested_project_collection_anonymous_projection(async);
@@ -944,6 +949,7 @@ WHERE (j."OwnedCollectionRoot" #>> ARRAY[@__prm_0,'Name']::text[]) <> 'Foo' OR (
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_index_in_predicate_using_column(bool async)
     {
         await base.Json_collection_index_in_predicate_using_column(async);
@@ -956,6 +962,7 @@ WHERE (j."OwnedCollectionRoot" #>> ARRAY[j."Id",'Name']::text[]) = 'e1_c2'
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_index_in_predicate_using_complex_expression1(bool async)
     {
         await base.Json_collection_index_in_predicate_using_complex_expression1(async);
@@ -971,6 +978,7 @@ END,'Name']::text[]) = 'e1_c1'
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_index_in_predicate_using_complex_expression2(bool async)
     {
         await base.Json_collection_index_in_predicate_using_complex_expression2(async);
@@ -997,6 +1005,7 @@ WHERE (j."OwnedCollectionRoot" #>> '{1,Name}') <> 'Foo' OR (j."OwnedCollectionRo
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_index_in_predicate_nested_mix(bool async)
     {
         await base.Json_collection_index_in_predicate_nested_mix(async);
@@ -1022,6 +1031,7 @@ FROM "JsonEntitiesBasic" AS j
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_Any_with_predicate(bool async)
     {
         await base.Json_collection_Any_with_predicate(async);
@@ -1046,6 +1056,7 @@ WHERE EXISTS (
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_Where_ElementAt(bool async)
     {
         await base.Json_collection_Where_ElementAt(async);
@@ -1071,6 +1082,7 @@ WHERE (
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_Skip(bool async)
     {
         await base.Json_collection_Skip(async);
@@ -1099,6 +1111,7 @@ WHERE (
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_OrderByDescending_Skip_ElementAt(bool async)
     {
         await base.Json_collection_OrderByDescending_Skip_ElementAt(async);
@@ -1129,6 +1142,7 @@ WHERE (
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_Distinct_Count_with_predicate(bool async)
     {
         await base.Json_collection_Distinct_Count_with_predicate(async);
@@ -1156,6 +1170,7 @@ WHERE (
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_within_collection_Count(bool async)
     {
         await base.Json_collection_within_collection_Count(async);
@@ -1189,6 +1204,7 @@ WHERE EXISTS (
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_in_projection_with_composition_count(bool async)
     {
         await base.Json_collection_in_projection_with_composition_count(async);
@@ -1210,6 +1226,7 @@ ORDER BY j."Id" NULLS FIRST
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_in_projection_with_anonymous_projection_of_scalars(bool async)
     {
         await base.Json_collection_in_projection_with_anonymous_projection_of_scalars(async);
@@ -1230,6 +1247,7 @@ ORDER BY j."Id" NULLS FIRST
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_in_projection_with_composition_where_and_anonymous_projection_of_scalars(bool async)
     {
         await base.Json_collection_in_projection_with_composition_where_and_anonymous_projection_of_scalars(async);
@@ -1254,6 +1272,7 @@ ORDER BY j."Id" NULLS FIRST
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_in_projection_with_composition_where_and_anonymous_projection_of_primitive_arrays(bool async)
     {
         await base.Json_collection_in_projection_with_composition_where_and_anonymous_projection_of_primitive_arrays(async);
@@ -1278,6 +1297,7 @@ ORDER BY j."Id" NULLS FIRST
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_filter_in_projection(bool async)
     {
         await base.Json_collection_filter_in_projection(async);
@@ -1302,6 +1322,7 @@ ORDER BY j."Id" NULLS FIRST
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_nested_collection_filter_in_projection(bool async)
     {
         await base.Json_nested_collection_filter_in_projection(async);
@@ -1339,6 +1360,7 @@ ORDER BY j."Id" NULLS FIRST, t0.ordinality NULLS FIRST
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_nested_collection_anonymous_projection_in_projection(bool async)
     {
         await base.Json_nested_collection_anonymous_projection_in_projection(async);
@@ -1372,6 +1394,7 @@ ORDER BY j."Id" NULLS FIRST, t.ordinality NULLS FIRST
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_skip_take_in_projection(bool async)
     {
         await base.Json_collection_skip_take_in_projection(async);
@@ -1397,6 +1420,7 @@ ORDER BY j."Id" NULLS FIRST, t.c1 NULLS FIRST
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_skip_take_in_projection_project_into_anonymous_type(bool async)
     {
         await base.Json_collection_skip_take_in_projection_project_into_anonymous_type(async);
@@ -1422,6 +1446,7 @@ ORDER BY j."Id" NULLS FIRST, t.c NULLS FIRST
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_skip_take_in_projection_with_json_reference_access_as_final_operation(bool async)
     {
         await base.Json_collection_skip_take_in_projection_with_json_reference_access_as_final_operation(async);
@@ -1447,6 +1472,7 @@ ORDER BY j."Id" NULLS FIRST, t.c0 NULLS FIRST
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_distinct_in_projection(bool async)
     {
         await base.Json_collection_distinct_in_projection(async);
@@ -1470,6 +1496,7 @@ ORDER BY j."Id" NULLS FIRST, t."Name" NULLS FIRST, t."Names" NULLS FIRST, t."Num
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_anonymous_projection_distinct_in_projection(bool async)
     {
         await base.Json_collection_anonymous_projection_distinct_in_projection(async);
@@ -1477,6 +1504,7 @@ ORDER BY j."Id" NULLS FIRST, t."Name" NULLS FIRST, t."Names" NULLS FIRST, t."Num
         AssertSql("");
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_leaf_filter_in_projection(bool async)
     {
         await base.Json_collection_leaf_filter_in_projection(async);
@@ -1494,6 +1522,7 @@ ORDER BY j."Id" NULLS FIRST
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_multiple_collection_projections(bool async)
     {
         await base.Json_multiple_collection_projections(async);
@@ -1548,6 +1577,7 @@ ORDER BY j."Id" NULLS FIRST, t.ordinality NULLS FIRST, t0."Name" NULLS FIRST, t0
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_branch_collection_distinct_and_other_collection(bool async)
     {
         await base.Json_branch_collection_distinct_and_other_collection(async);
@@ -1574,6 +1604,7 @@ ORDER BY j."Id" NULLS FIRST, t."Date" NULLS FIRST, t."Enum" NULLS FIRST, t."Enum
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_leaf_collection_distinct_and_other_collection(bool async)
     {
         await base.Json_leaf_collection_distinct_and_other_collection(async);
@@ -1591,6 +1622,7 @@ ORDER BY j."Id" NULLS FIRST, t."SomethingSomething" NULLS FIRST
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_SelectMany(bool async)
     {
         await base.Json_collection_SelectMany(async);
@@ -1610,6 +1642,7 @@ JOIN LATERAL ROWS FROM (jsonb_to_recordset(j."OwnedCollectionRoot") AS (
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_nested_collection_SelectMany(bool async)
     {
         await base.Json_nested_collection_SelectMany(async);
@@ -1674,6 +1707,7 @@ ORDER BY ((ARRAY(SELECT CAST(element AS integer) FROM jsonb_array_elements_text(
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_of_primitives_contains_in_predicate(bool async)
     {
         await base.Json_collection_of_primitives_contains_in_predicate(async);
@@ -1686,6 +1720,7 @@ WHERE 'e1_r1' = ANY ((ARRAY(SELECT CAST(element AS text) FROM jsonb_array_elemen
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_index_with_parameter_Select_ElementAt(bool async)
     {
         await base.Json_collection_index_with_parameter_Select_ElementAt(async);
@@ -1735,6 +1770,7 @@ FROM "JsonEntitiesBasic" AS j
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_Select_entity_ElementAt(bool async)
     {
         await base.Json_collection_Select_entity_ElementAt(async);
@@ -1746,6 +1782,7 @@ FROM "JsonEntitiesBasic" AS j
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_Select_entity_in_anonymous_object_ElementAt(bool async)
     {
         await base.Json_collection_Select_entity_in_anonymous_object_ElementAt(async);
@@ -1770,6 +1807,7 @@ ORDER BY j."Id" NULLS FIRST
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_Select_entity_with_initializer_ElementAt(bool async)
     {
         await base.Json_collection_Select_entity_with_initializer_ElementAt(async);
@@ -1793,6 +1831,7 @@ LEFT JOIN LATERAL (
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_projection_deduplication_with_collection_indexer_in_original(bool async)
     {
         await base.Json_projection_deduplication_with_collection_indexer_in_original(async);
@@ -1804,6 +1843,7 @@ FROM "JsonEntitiesBasic" AS j
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_projection_deduplication_with_collection_indexer_in_target(bool async)
     {
         await base.Json_projection_deduplication_with_collection_indexer_in_target(async);
@@ -1889,6 +1929,7 @@ FROM "JsonEntitiesBasic" AS j
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_after_collection_index_in_projection_using_constant_when_owner_is_not_present(bool async)
     {
         await base.Json_collection_after_collection_index_in_projection_using_constant_when_owner_is_not_present(async);
@@ -1900,6 +1941,7 @@ FROM "JsonEntitiesBasic" AS j
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_after_collection_index_in_projection_using_parameter_when_owner_is_present(bool async)
     {
         await base.Json_collection_after_collection_index_in_projection_using_parameter_when_owner_is_present(async);
@@ -1913,6 +1955,7 @@ FROM "JsonEntitiesBasic" AS j
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_after_collection_index_in_projection_using_parameter_when_owner_is_not_present(bool async)
     {
         await base.Json_collection_after_collection_index_in_projection_using_parameter_when_owner_is_not_present(async);
@@ -1926,6 +1969,7 @@ FROM "JsonEntitiesBasic" AS j
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_index_in_projection_when_owner_is_present_misc1(bool async)
     {
         await base.Json_collection_index_in_projection_when_owner_is_present_misc1(async);
@@ -1952,6 +1996,7 @@ FROM "JsonEntitiesBasic" AS j
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_index_in_projection_when_owner_is_present_misc2(bool async)
     {
         await base.Json_collection_index_in_projection_when_owner_is_present_misc2(async);
@@ -1974,6 +2019,7 @@ FROM "JsonEntitiesBasic" AS j
 """);
     }
 
+    [SkipForCockroachDb("Unsupported")]
     public override async Task Json_collection_index_in_projection_when_owner_is_present_multiple(bool async)
     {
         await base.Json_collection_index_in_projection_when_owner_is_present_multiple(async);
