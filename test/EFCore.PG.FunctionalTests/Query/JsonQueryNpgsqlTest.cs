@@ -5,6 +5,11 @@ namespace Npgsql.EntityFrameworkCore.PostgreSQL.Query;
 
 public class JsonQueryNpgsqlTest : JsonQueryTestBase<JsonQueryNpgsqlTest.JsonQueryNpgsqlFixture>
 {
+    static JsonQueryNpgsqlTest()
+    {
+        AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);    
+    }
+    
     public JsonQueryNpgsqlTest(JsonQueryNpgsqlFixture fixture, ITestOutputHelper testOutputHelper)
         : base(fixture)
     {
