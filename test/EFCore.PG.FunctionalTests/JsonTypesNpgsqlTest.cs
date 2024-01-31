@@ -4,11 +4,13 @@ using System.Collections;
 
 using System.Globalization;
 using System.Numerics;
+using Npgsql.EntityFrameworkCore.PostgreSQL.TestUtilities;
 
 namespace Npgsql.EntityFrameworkCore.PostgreSQL;
 
 public class JsonTypesNpgsqlTest : JsonTypesRelationalTestBase
 {
+    
     public override void Can_read_write_ulong_enum_JSON_values(EnumU64 value, string json)
     {
         // Relational databases don't support unsigned numeric types, so ulong is value-converted to long
@@ -141,6 +143,7 @@ public class JsonTypesNpgsqlTest : JsonTypesRelationalTestBase
         // to override. See Can_read_write_TimeSpan_JSON_values_sqlite instead.
     }
 
+    [SkipForCockroachDb("Incompatible")]
     [ConditionalTheory]
     [InlineData("1/1/0001", """{"Prop":"-infinity"}""")]
     [InlineData("12/31/9999", """{"Prop":"infinity"}""")]
@@ -156,6 +159,7 @@ public class JsonTypesNpgsqlTest : JsonTypesRelationalTestBase
         // to override. See Can_read_write_DateOnly_JSON_values_sqlite instead.
     }
 
+    [SkipForCockroachDb("Incompatible")]
     [ConditionalTheory]
     [InlineData("1/1/0001", """{"Prop":"-infinity"}""")]
     [InlineData("12/31/9999", """{"Prop":"infinity"}""")]
@@ -166,6 +170,7 @@ public class JsonTypesNpgsqlTest : JsonTypesRelationalTestBase
             nameof(NullableDateOnlyType.DateOnly),
             value == null ? default(DateOnly?) : DateOnly.Parse(value, CultureInfo.InvariantCulture), json);
 
+    [SkipForCockroachDb("Incompatible")]
     [ConditionalFact]
     public virtual void Can_read_write_DateOnly_JSON_values_infinity()
     {
@@ -173,6 +178,7 @@ public class JsonTypesNpgsqlTest : JsonTypesRelationalTestBase
         Can_read_and_write_JSON_value<DateOnlyType, DateOnly>(nameof(DateOnlyType.DateOnly), DateOnly.MaxValue, """{"Prop":"infinity"}""");
     }
 
+    [SkipForCockroachDb("Incompatible")]
     [ConditionalFact]
     public override void Can_read_write_collection_of_DateOnly_JSON_values()
         => Can_read_and_write_JSON_value<DateOnlyCollectionType, List<DateOnly>>(
@@ -186,6 +192,7 @@ public class JsonTypesNpgsqlTest : JsonTypesRelationalTestBase
             """{"Prop":["-infinity","2023-05-29","infinity"]}""",
             mappedCollection: true);
 
+    [SkipForCockroachDb("Incompatible")]
     [ConditionalFact]
     public override void Can_read_write_collection_of_nullable_DateOnly_JSON_values()
         => Can_read_and_write_JSON_value<NullableDateOnlyCollectionType, List<DateOnly?>>(
@@ -210,6 +217,7 @@ public class JsonTypesNpgsqlTest : JsonTypesRelationalTestBase
         // to override. See Can_read_write_TimeSpan_JSON_values_sqlite instead.
     }
 
+    [SkipForCockroachDb("Incompatible")]
     [ConditionalTheory]
     [InlineData("2023-05-29T10:52:47.206435Z", """{"Prop":"2023-05-29T10:52:47.206435Z"}""")]
     public virtual void Can_read_write_DateTime_JSON_values_npgsql(string value, string json)
@@ -217,12 +225,14 @@ public class JsonTypesNpgsqlTest : JsonTypesRelationalTestBase
             nameof(DateTimeType.DateTime),
             DateTime.Parse(value, CultureInfo.InvariantCulture).ToUniversalTime(), json);
 
+    [SkipForCockroachDb("Incompatible")]
     [ConditionalFact]
     public virtual void Can_read_write_DateTime_JSON_values_npgsql_infinity()
         => Can_read_and_write_JSON_value<DateTimeType, DateTime>(
             nameof(DateTimeType.DateTime),
             DateTime.MaxValue, """{"Prop":"infinity"}""");
 
+    [SkipForCockroachDb("Incompatible")]
     [ConditionalFact]
     public virtual void Can_read_write_DateTime_JSON_values_npgsql_negative_infinity()
         => Can_read_and_write_JSON_value<DateTimeType, DateTime>(
@@ -235,6 +245,7 @@ public class JsonTypesNpgsqlTest : JsonTypesRelationalTestBase
         // to override. See Can_read_write_TimeSpan_JSON_values_sqlite instead.
     }
 
+    [SkipForCockroachDb("Incompatible")]
     [ConditionalTheory]
     [InlineData("0001-01-01T00:00:00.0000000", """{"Prop":"-infinity"}""")]
     [InlineData("9999-12-31T23:59:59.9999999", """{"Prop":"infinity"}""")]
@@ -247,6 +258,7 @@ public class JsonTypesNpgsqlTest : JsonTypesRelationalTestBase
                 ? default(DateTime?)
                 : DateTime.SpecifyKind(DateTime.Parse(value, CultureInfo.InvariantCulture), DateTimeKind.Utc), json);
 
+    [SkipForCockroachDb("Incompatible")]
     [ConditionalFact]
     public override void Can_read_write_collection_of_DateTime_JSON_values()
         => Can_read_and_write_JSON_value<DateTimeCollectionType, List<DateTime>>(
@@ -260,6 +272,7 @@ public class JsonTypesNpgsqlTest : JsonTypesRelationalTestBase
             """{"Prop":["-infinity","2023-05-29T10:52:47Z","infinity"]}""",
             mappedCollection: true);
 
+    [SkipForCockroachDb("Incompatible")]
     [ConditionalFact]
     public override void Can_read_write_collection_of_nullable_DateTime_JSON_values()
         => Can_read_and_write_JSON_value<NullableDateTimeCollectionType, List<DateTime?>>(
@@ -274,6 +287,7 @@ public class JsonTypesNpgsqlTest : JsonTypesRelationalTestBase
             """{"Prop":["-infinity",null,"2023-05-29T10:52:47Z","infinity"]}""",
             mappedCollection: true);
 
+    [SkipForCockroachDb("Incompatible")]
     [ConditionalFact]
     public virtual void Can_read_write_DateTime_timestamptz_JSON_values_infinity()
     {
@@ -281,6 +295,7 @@ public class JsonTypesNpgsqlTest : JsonTypesRelationalTestBase
         Can_read_and_write_JSON_value<DateTimeType, DateTime>(nameof(DateTimeType.DateTime), DateTime.MaxValue, """{"Prop":"infinity"}""");
     }
 
+    [SkipForCockroachDb("Incompatible")]
     [ConditionalFact]
     public virtual void Can_read_write_DateTime_timestamp_JSON_values_infinity()
     {
@@ -334,6 +349,7 @@ public class JsonTypesNpgsqlTest : JsonTypesRelationalTestBase
             nameof(NullableDateTimeOffsetType.DateTimeOffset),
             value == null ? default(DateTimeOffset?) : DateTimeOffset.Parse(value, CultureInfo.InvariantCulture), json);
 
+    [SkipForCockroachDb("Incompatible")]
     [ConditionalFact]
     public override void Can_read_write_collection_of_DateTimeOffset_JSON_values()
         => Can_read_and_write_JSON_value<DateTimeOffsetCollectionType, List<DateTimeOffset>>(
@@ -349,6 +365,7 @@ public class JsonTypesNpgsqlTest : JsonTypesRelationalTestBase
             """{"Prop":["-infinity","2023-05-29T10:52:47-02:00","2023-05-29T10:52:47\u002B00:00","2023-05-29T10:52:47\u002B02:00","infinity"]}""",
             mappedCollection: true);
 
+    [SkipForCockroachDb("Incompatible")]
     [ConditionalFact]
     public override void Can_read_write_collection_of_nullable_DateTimeOffset_JSON_values()
         => Can_read_and_write_JSON_value<NullableDateTimeOffsetCollectionType, List<DateTimeOffset?>>(
@@ -476,5 +493,7 @@ public class JsonTypesNpgsqlTest : JsonTypesRelationalTestBase
         // the database. We just need the mapping to be picked up by EFCore.PG from the ADO.NET layer.
         NpgsqlConnection.GlobalTypeMapper.MapEnum<Mood>("test.mapped_enum");
 #pragma warning restore CS0618
+        
+        AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true); 
     }
 }
