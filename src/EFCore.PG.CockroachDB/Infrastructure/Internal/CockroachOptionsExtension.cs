@@ -59,7 +59,7 @@ public class CockroachOptionsExtensionInfo : DbContextOptionsExtensionInfo
     /// <exception cref="NotImplementedException"></exception>
     public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other)
     {
-        throw new NotImplementedException();
+        return true;
     }
 
     /// <summary>

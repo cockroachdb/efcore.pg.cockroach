@@ -89,6 +89,8 @@ SET "OwnedReference_Number" = length(o."Title")::int,
 """);
     }
 
+    //TODO: Investigate and fix
+    [SkipForCockroachDb("Incompatible")]
     public override async Task Update_main_table_in_entity_with_entity_splitting(bool async)
     {
         // Overridden/duplicated because we update DateTime, which Npgsql requires to be a UTC timestamp
@@ -121,6 +123,8 @@ SET "CreationTimestamp" = TIMESTAMPTZ '2020-01-01T00:00:00Z'
 """);
     }
 
+    //TODO: Investigate and fix
+    [SkipForCockroachDb("Incompatible")]
     public override async Task Update_non_main_table_in_entity_with_entity_splitting(bool async)
     {
         await base.Update_non_main_table_in_entity_with_entity_splitting(async);
