@@ -27,12 +27,7 @@ CREATE TABLE "__EFMigrationsHistory" (
 
         Assert.Equal(
             """
-DO $EF$
-BEGIN
-    IF NOT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = 'my') THEN
-        CREATE SCHEMA my;
-    END IF;
-END $EF$;
+CREATE SCHEMA IF NOT EXISTS my;
 CREATE TABLE my."__EFMigrationsHistory" (
     "MigrationId" character varying(150) NOT NULL,
     "ProductVersion" character varying(32) NOT NULL,
@@ -65,12 +60,7 @@ CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
 
         Assert.Equal(
             """
-DO $EF$
-BEGIN
-    IF NOT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = 'my') THEN
-        CREATE SCHEMA my;
-    END IF;
-END $EF$;
+CREATE SCHEMA IF NOT EXISTS my;
 CREATE TABLE IF NOT EXISTS my."__EFMigrationsHistory" (
     "MigrationId" character varying(150) NOT NULL,
     "ProductVersion" character varying(32) NOT NULL,
