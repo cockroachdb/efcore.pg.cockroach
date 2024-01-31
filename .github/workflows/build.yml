@@ -63,8 +63,8 @@ jobs:
           # Start the initialization
           cockroach start-single-node --certs-dir=certs --advertise-addr=127.0.0.1:26257 --background
           cockroach sql --certs-dir=certs -e "CREATE USER crdb_tests WITH PASSWORD 'crdb_tests'; GRANT admin TO crdb_tests" --url="postgresql://root@127.0.0.1:26257/defaultdb?sslcert=certs%2Fclient.root.crt&sslkey=certs%2Fclient.root.key&sslmode=verify-full&sslrootcert=certs%2Fca.crt"
-          cockroach sql --certs-dir=certs -e "SET CLUSTER SETTING sql.defaults.default_int_size = 4;"
-          cockroach sql --certs-dir=certs -e "SET CLUSTER SETTING sql.defaults.serial_normalization = 2;"
+          cockroach sql --certs-dir=certs -e "SET CLUSTER SETTING sql.defaults.default_int_size = 4;" --url="postgresql://root@127.0.0.1:26257/defaultdb?sslcert=certs%2Fclient.root.crt&sslkey=certs%2Fclient.root.key&sslmode=verify-full&sslrootcert=certs%2Fca.crt"
+          cockroach sql --certs-dir=certs -e "SET CLUSTER SETTING sql.defaults.serial_normalization = 2;" --url="postgresql://root@127.0.0.1:26257/defaultdb?sslcert=certs%2Fclient.root.crt&sslkey=certs%2Fclient.root.key&sslmode=verify-full&sslrootcert=certs%2Fca.crt"
       
       - name: Test
         run: dotnet test -c ${{ matrix.config }} --logger "GitHubActions;report-warnings=false"
