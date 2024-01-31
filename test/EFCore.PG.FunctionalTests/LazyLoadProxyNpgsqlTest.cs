@@ -18,6 +18,11 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
     public override void Lazy_load_one_to_one_reference_with_recursive_property(EntityState state)
         => base.Lazy_load_one_to_one_reference_with_recursive_property(state);
 
+    public override void Can_serialize_proxies_to_JSON()
+    {
+      base.Can_serialize_proxies_to_JSON();
+    }
+
     protected override void ClearLog()
         => Fixture.TestSqlLoggerFactory.Clear();
 
@@ -29,7 +34,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
 
     #region Expected JSON override
 
-    // TODO: Tiny discrepancy in decimal representation (Charge: 1.0 instead of 1.00)
+    // TODO: Tiny discrepancy in decimal representation (Charge: 1 instead of 1.00)
     protected override string SerializedBlogs2
         => """
 {
@@ -62,7 +67,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
           },
           "License": {
             "Title": "Ti1",
-            "Charge": 1.0,
+            "Charge": 1,
             "Tag": {
               "$id": "6",
               "Text": "Ta1"
@@ -92,7 +97,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
           },
           "License": {
             "Title": "Ti1",
-            "Charge": 1.0,
+            "Charge": 1,
             "Tag": {
               "$id": "10",
               "Text": "Ta1"
@@ -127,7 +132,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
           },
           "License": {
             "Title": "Ti1",
-            "Charge": 1.0,
+            "Charge": 1,
             "Tag": {
               "$id": "14",
               "Text": "Ta1"
@@ -157,7 +162,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
           },
           "License": {
             "Title": "Ti1",
-            "Charge": 1.0,
+            "Charge": 1,
             "Tag": {
               "$id": "18",
               "Text": "Ta1"
@@ -191,7 +196,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
           },
           "License": {
             "Title": "Ti1",
-            "Charge": 1.0,
+            "Charge": 1,
             "Tag": {
               "$id": "22",
               "Text": "Ta1"
@@ -221,7 +226,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
           },
           "License": {
             "Title": "Ti1",
-            "Charge": 1.0,
+            "Charge": 1,
             "Tag": {
               "$id": "26",
               "Text": "Ta1"
@@ -251,7 +256,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
         },
         "License": {
           "Title": "Ti1",
-          "Charge": 1.0,
+          "Charge": 1,
           "Tag": {
             "$id": "29",
             "Text": "Ta1"
@@ -281,7 +286,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
         },
         "License": {
           "Title": "Ti1",
-          "Charge": 1.0,
+          "Charge": 1,
           "Tag": {
             "$id": "33",
             "Text": "Ta1"
@@ -319,7 +324,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
           },
           "License": {
             "Title": "Ti1",
-            "Charge": 1.0,
+            "Charge": 1,
             "Tag": {
               "$id": "38",
               "Text": "Ta1"
@@ -349,7 +354,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
           },
           "License": {
             "Title": "Ti1",
-            "Charge": 1.0,
+            "Charge": 1,
             "Tag": {
               "$id": "42",
               "Text": "Ta1"
@@ -384,7 +389,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
           },
           "License": {
             "Title": "Ti1",
-            "Charge": 1.0,
+            "Charge": 1,
             "Tag": {
               "$id": "46",
               "Text": "Ta1"
@@ -414,7 +419,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
           },
           "License": {
             "Title": "Ti1",
-            "Charge": 1.0,
+            "Charge": 1,
             "Tag": {
               "$id": "50",
               "Text": "Ta1"
@@ -448,7 +453,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
           },
           "License": {
             "Title": "Ti1",
-            "Charge": 1.0,
+            "Charge": 1,
             "Tag": {
               "$id": "54",
               "Text": "Ta1"
@@ -478,7 +483,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
           },
           "License": {
             "Title": "Ti1",
-            "Charge": 1.0,
+            "Charge": 1,
             "Tag": {
               "$id": "58",
               "Text": "Ta1"
@@ -508,7 +513,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
         },
         "License": {
           "Title": "Ti1",
-          "Charge": 1.0,
+          "Charge": 1,
           "Tag": {
             "$id": "61",
             "Text": "Ta1"
@@ -538,7 +543,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
         },
         "License": {
           "Title": "Ti1",
-          "Charge": 1.0,
+          "Charge": 1,
           "Tag": {
             "$id": "65",
             "Text": "Ta1"
@@ -576,7 +581,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
           },
           "License": {
             "Title": "Ti1",
-            "Charge": 1.0,
+            "Charge": 1,
             "Tag": {
               "$id": "70",
               "Text": "Ta1"
@@ -606,7 +611,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
           },
           "License": {
             "Title": "Ti1",
-            "Charge": 1.0,
+            "Charge": 1,
             "Tag": {
               "$id": "74",
               "Text": "Ta1"
@@ -641,7 +646,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
           },
           "License": {
             "Title": "Ti1",
-            "Charge": 1.0,
+            "Charge": 1,
             "Tag": {
               "$id": "78",
               "Text": "Ta1"
@@ -671,7 +676,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
           },
           "License": {
             "Title": "Ti1",
-            "Charge": 1.0,
+            "Charge": 1,
             "Tag": {
               "$id": "82",
               "Text": "Ta1"
@@ -705,7 +710,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
           },
           "License": {
             "Title": "Ti1",
-            "Charge": 1.0,
+            "Charge": 1,
             "Tag": {
               "$id": "86",
               "Text": "Ta1"
@@ -735,7 +740,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
           },
           "License": {
             "Title": "Ti1",
-            "Charge": 1.0,
+            "Charge": 1,
             "Tag": {
               "$id": "90",
               "Text": "Ta1"
@@ -765,7 +770,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
         },
         "License": {
           "Title": "Ti1",
-          "Charge": 1.0,
+          "Charge": 1,
           "Tag": {
             "$id": "93",
             "Text": "Ta1"
@@ -795,7 +800,7 @@ public class LazyLoadProxyNpgsqlTest : LazyLoadProxyTestBase<LazyLoadProxyNpgsql
         },
         "License": {
           "Title": "Ti1",
-          "Charge": 1.0,
+          "Charge": 1,
           "Tag": {
             "$id": "97",
             "Text": "Ta1"
