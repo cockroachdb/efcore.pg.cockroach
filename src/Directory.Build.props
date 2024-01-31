@@ -1,17 +1,17 @@
 ﻿<Project>
-  <Import Project="..\Directory.Build.props" />
+    <Import Project="..\Directory.Build.props"/>
 
-  <PropertyGroup>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <Nullable>enable</Nullable>
-    <Feature>nullablePublicOnly</Feature>
+    <PropertyGroup>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <Nullable>enable</Nullable>
+        <Feature>nullablePublicOnly</Feature>
 
-    <NoWarn>$(NoWarn);EF1001</NoWarn>
-  </PropertyGroup>
+        <NoWarn>$(NoWarn);EF1001</NoWarn>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All"/>
+    </ItemGroup>
 </Project>
