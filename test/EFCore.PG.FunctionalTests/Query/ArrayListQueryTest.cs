@@ -1,4 +1,5 @@
 using Npgsql.EntityFrameworkCore.PostgreSQL.TestModels.Array;
+using Npgsql.EntityFrameworkCore.PostgreSQL.TestUtilities;
 
 namespace Npgsql.EntityFrameworkCore.PostgreSQL.Query;
 
@@ -859,7 +860,8 @@ WHERE COALESCE(array_position(s."IntList", 6) - 1, -1) = 1
 """);
     }
 
-    [Theory]
+    [SkipForCockroachDb("Incompatible")]
+    [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public override async Task Array_IndexOf2(bool async)
     {

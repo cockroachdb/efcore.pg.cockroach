@@ -546,9 +546,8 @@ DROP SEQUENCE "Person_Id_old_seq";
 
         AssertSql(
             """
-    CREATE SCHEMA IF NOT EXISTS some_schema;
-
-""");
+            CREATE SCHEMA IF NOT EXISTS some_schema;
+            """);
     }
 
     #region CockroachDB interleave-in-parent
