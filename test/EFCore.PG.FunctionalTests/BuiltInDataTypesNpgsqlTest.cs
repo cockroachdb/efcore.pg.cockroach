@@ -229,9 +229,10 @@ WHERE m."TimeSpanAsTime" = @__timeSpan_0
             StringEnumU16? param27 = StringEnumU16.Value4;
             Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.EnumAsVarchar == param27));
 
-            var param28 = PhysicalAddress.Parse("08-00-2B-01-02-03");
-            Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.PhysicalAddressAsMacaddr.Equals(param28)));
+            // CockroachDB doesn't support macaddr
+            // var param28 = PhysicalAddress.Parse("08-00-2B-01-02-03");
+            // Assert.Same(
+            //    entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.PhysicalAddressAsMacaddr.Equals(param28)));
 
             // PostgreSQL doesn't support equality comparison on point
             // NpgsqlPoint? param29 = new NpgsqlPoint(5.2, 3.3);
@@ -245,27 +246,29 @@ WHERE m."TimeSpanAsTime" = @__timeSpan_0
             // var param31 = @"{""a"": ""b""}";
             // Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.StringAsJson == param31));
 
-            var param32 = new Dictionary<string, string> { { "a", "b" } };
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.DictionaryAsHstore == param32));
-
-            var param33 = ImmutableDictionary<string, string>.Empty.Add("c", "d");
-            Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.ImmutableDictionaryAsHstore == param33));
-
-            var param34 = new NpgsqlRange<int>(4, true, 8, false);
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.NpgsqlRangeAsRange == param34));
+            // CockroachDB doesn't support hstore and range types
+            // var param32 = new Dictionary<string, string> { { "a", "b" } };
+            // Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.DictionaryAsHstore == param32));
+            //
+            // var param33 = ImmutableDictionary<string, string>.Empty.Add("c", "d");
+            // Assert.Same(
+            //     entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.ImmutableDictionaryAsHstore == param33));
+            //
+            // var param34 = new NpgsqlRange<int>(4, true, 8, false);
+            // Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.NpgsqlRangeAsRange == param34));
 
             var param35 = new[] { 2, 3 };
             Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.IntArrayAsIntArray == param35));
 
-            var param36 = new[] { PhysicalAddress.Parse("08-00-2B-01-02-03"), PhysicalAddress.Parse("08-00-2B-01-02-04") };
-            Assert.Same(
-                entity,
-                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.PhysicalAddressArrayAsMacaddrArray == param36));
-
-            // ReSharper disable once ConvertToConstant.Local
-            var param37 = (uint)int.MaxValue + 1;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.UintAsXid == param37));
+            // CockroachDB doesn't support macaddr and xid
+            // var param36 = new[] { PhysicalAddress.Parse("08-00-2B-01-02-03"), PhysicalAddress.Parse("08-00-2B-01-02-04") };
+            // Assert.Same(
+            //     entity,
+            //     context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.PhysicalAddressArrayAsMacaddrArray == param36));
+            //
+            // // ReSharper disable once ConvertToConstant.Local
+            // var param37 = (uint)int.MaxValue + 1;
+            // Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.UintAsXid == param37));
 
 #pragma warning disable CS0618 // Full-text search client-parsing is obsolete
             var param38 = NpgsqlTsQuery.Parse("a & b");
@@ -280,8 +283,9 @@ WHERE m."TimeSpanAsTime" = @__timeSpan_0
             Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.RankingNormalization == param40));
 
             // ReSharper disable once ConvertToConstant.Local
-            var param41 = 12724u;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.Regconfig == param41));
+            
+            // var param41 = 12724u;
+            // Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.Regconfig == param41));
 
             // ReSharper disable once ConvertToConstant.Local
             var param42 = Mood.Sad;
@@ -333,8 +337,9 @@ WHERE m."TimeSpanAsTime" = @__timeSpan_0
             bool? param8 = null;
             Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.BoolAsBoolean == param8));
 
-            decimal? param9 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.DecimalAsMoney == param9));
+            // CockroachDB doesn't support money type
+            // decimal? param9 = null;
+            // Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.DecimalAsMoney == param9));
 
             decimal? param10 = null;
             Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.Decimal == param10));
@@ -403,9 +408,9 @@ WHERE m."TimeSpanAsTime" = @__timeSpan_0
             StringEnumU16? param27 = null;
             Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.EnumAsVarchar == param27));
 
-            PhysicalAddress param28 = null;
+            // PhysicalAddress param28 = null;
             // ReSharper disable once PossibleUnintendedReferenceComparison
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.PhysicalAddressAsMacaddr == param28));
+            // Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.PhysicalAddressAsMacaddr == param28));
 
             // PostgreSQL does not support equality comparison on geometry types, see https://www.postgresql.org/docs/current/functions-geometry.html
             //NpgsqlPoint? param29 = null;
@@ -418,26 +423,26 @@ WHERE m."TimeSpanAsTime" = @__timeSpan_0
             //string param31 = null;
             //Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.StringAsJson == param31));
 
-            Dictionary<string, string> param32 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.DictionaryAsHstore == param32));
-
-            ImmutableDictionary<string, string> param33 = null;
-            Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.ImmutableDictionaryAsHstore == param33));
-
-            NpgsqlRange<int>? param34 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.NpgsqlRangeAsRange == param34));
+            // Dictionary<string, string> param32 = null;
+            // Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.DictionaryAsHstore == param32));
+            //
+            // ImmutableDictionary<string, string> param33 = null;
+            // Assert.Same(
+            //     entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.ImmutableDictionaryAsHstore == param33));
+            //
+            // NpgsqlRange<int>? param34 = null;
+            // Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.NpgsqlRangeAsRange == param34));
 
             int[] param35 = null;
             Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.IntArrayAsIntArray == param35));
 
-            PhysicalAddress[] param36 = null;
-            Assert.Same(
-                entity,
-                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.PhysicalAddressArrayAsMacaddrArray == param36));
-
-            uint? param37 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.UintAsXid == param37));
+            // PhysicalAddress[] param36 = null;
+            // Assert.Same(
+            //     entity,
+            //     context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.PhysicalAddressArrayAsMacaddrArray == param36));
+            //
+            // uint? param37 = null;
+            // Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.UintAsXid == param37));
 
             NpgsqlTsQuery param38 = null;
             Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.SearchQuery == param38));
@@ -448,8 +453,8 @@ WHERE m."TimeSpanAsTime" = @__timeSpan_0
             NpgsqlTsRankingNormalization? param40 = null;
             Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.RankingNormalization == param40));
 
-            uint? param41 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.Regconfig == param41));
+            // uint? param41 = null;
+            // Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.Regconfig == param41));
 
             Mood? param42 = null;
             Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.Mood == param42));
@@ -478,40 +483,30 @@ WHERE m."TimeSpanAsTime" = @__timeSpan_0
 @p8='2016-01-02T11:11:12.0000000Z' (DbType = DateTime)
 @p9='0001-01-01T12:00:00.0000000+02:00' (DbType = Object)
 @p10='101.7'
-@p11='81.1' (DbType = Currency)
-@p12='103.9'
-@p13='System.Collections.Generic.Dictionary`2[System.String,System.String]' (Nullable = false) (DbType = Object)
-@p14='85.5'
-@p15='Value4' (Nullable = false)
-@p16='Value4' (Nullable = false)
-@p17='84.4'
-@p18='a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'
-@p19={ '2'
+@p11='103.9'
+@p12='85.5'
+@p13='Value4' (Nullable = false)
+@p14='Value4' (Nullable = false)
+@p15='84.4'
+@p16='a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'
+@p17={ '2'
 '3' } (Nullable = false) (DbType = Object)
-@p20='78'
-@p21='Sad' (DbType = Object)
-@p22='(5.2,3.3)' (DbType = Object)
-@p23='[4,8)' (DbType = Object)
-@p24={ '08002B010203'
-'08002B010204' } (Nullable = false) (DbType = Object)
-@p25='08002B010203' (Nullable = false) (DbType = Object)
-@p26='2'
-@p27='12724' (DbType = Object)
-@p28=''a' & 'b'' (Nullable = false) (DbType = Object)
-@p29=''a' 'b'' (Nullable = false) (DbType = Object)
-@p30='79'
-@p31='{""a"": ""b""}' (Nullable = false) (DbType = Object)
-@p32='{""a"": ""b""}' (Nullable = false) (DbType = Object)
-@p33='Gumball Rules!' (Nullable = false)
-@p34='Gumball Rules OK' (Nullable = false)
-@p35='11:15:12' (DbType = Object)
-@p36='11:15:12'
-@p37='65535'
-@p38='-1'
-@p39='4294967295'
-@p40='-1'
-@p41='2147483648' (DbType = Object)
-@p42='-1'",
+@p18='78'
+@p19='Sad' (DbType = Object)
+@p20='2'
+@p21=''a' & 'b'' (Nullable = false) (DbType = Object)
+@p22=''a' 'b'' (Nullable = false) (DbType = Object)
+@p23='79'
+@p24='{""a"": ""b""}' (Nullable = false) (DbType = Object)
+@p25='Gumball Rules!' (Nullable = false)
+@p26='Gumball Rules OK' (Nullable = false)
+@p27='11:15:12' (DbType = Object)
+@p28='11:15:12'
+@p29='65535'
+@p30='-1'
+@p31='4294967295'
+@p32='-1'
+@p33='-1'",
             parameters,
             ignoreLineEndingDifferences: true);
     }
@@ -922,6 +917,7 @@ FROM "MappedDataTypes" AS m
 """);
     }
 
+    [SkipForCockroachDb("CockroachDB doesn't support money type, https://github.com/cockroachdb/cockroach/issues/41578")]
     [ConditionalFact]
     public void Money_compare_constant()
     {
@@ -930,6 +926,7 @@ FROM "MappedDataTypes" AS m
         _ = context.Set<MappedDataTypes>().Where(m => m.DecimalAsMoney > 3).ToList();
     }
 
+    [SkipForCockroachDb("CockroachDB doesn't support money type, https://github.com/cockroachdb/cockroach/issues/41578")]
     [ConditionalFact]
     public void Money_compare_parameter()
     {
@@ -976,6 +973,7 @@ FROM "MappedDataTypes" AS m
 #pragma warning disable CS0618 // NpgsqlConnection.GlobalTypeMapper is obsolete
             NpgsqlConnection.GlobalTypeMapper.MapEnum<Mood>();
 #pragma warning restore CS0618
+            AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
@@ -1063,6 +1061,17 @@ FROM "MappedDataTypes" AS m
                 {
                     b.HasKey(e => e.Int);
                     b.Property(e => e.Int).ValueGeneratedNever();
+                    
+                    // Ignore fields that use data type unsupported by CockroachDB
+                    b.Ignore(e => e.DictionaryAsHstore);
+                    b.Ignore(e => e.DecimalAsMoney);
+                    b.Ignore(e => e.PhysicalAddressAsMacaddr);
+                    b.Ignore(e => e.NpgsqlPointAsPoint);
+                    b.Ignore(e => e.PhysicalAddressArrayAsMacaddrArray);
+                    b.Ignore(e => e.NpgsqlRangeAsRange);
+                    b.Ignore(e => e.UintAsXid);
+                    b.Ignore(e => e.Regconfig);
+                    b.Ignore(e => e.StringAsJson);
                 });
 
             modelBuilder.Entity<MappedNullableDataTypes>(
@@ -1070,6 +1079,18 @@ FROM "MappedDataTypes" AS m
                 {
                     b.HasKey(e => e.Int);
                     b.Property(e => e.Int).ValueGeneratedNever();
+                    
+                    // Ignore fields that use data type unsupported by CockroachDB
+                    b.Ignore(e => e.DictionaryAsHstore);
+                    b.Ignore(e => e.ImmutableDictionaryAsHstore);
+                    b.Ignore(e => e.DecimalAsMoney);
+                    b.Ignore(e => e.PhysicalAddressAsMacaddr);
+                    b.Ignore(e => e.NpgsqlPointAsPoint);
+                    b.Ignore(e => e.PhysicalAddressArrayAsMacaddrArray);
+                    b.Ignore(e => e.NpgsqlRangeAsRange);
+                    b.Ignore(e => e.UintAsXid);
+                    b.Ignore(e => e.Regconfig);
+                    b.Ignore(e => e.StringAsJson);
                 });
 
             modelBuilder.Entity<MappedSizedDataTypes>()
@@ -1088,11 +1109,14 @@ FROM "MappedDataTypes" AS m
             modelBuilder.Entity<MappedDataTypes>().Property(x => x.SearchQuery).HasColumnType("tsquery");
             modelBuilder.Entity<MappedDataTypes>().Property(x => x.SearchVector).HasColumnType("tsvector");
             modelBuilder.Entity<MappedDataTypes>().Property(x => x.RankingNormalization).HasColumnType("integer");
-            modelBuilder.Entity<MappedDataTypes>().Property(x => x.Regconfig).HasColumnType("regconfig");
+            
+            // CockroachDB doesn't support regconfig type
+            // modelBuilder.Entity<MappedDataTypes>().Property(x => x.Regconfig).HasColumnType("regconfig");
             modelBuilder.Entity<MappedNullableDataTypes>().Property(x => x.SearchQuery).HasColumnType("tsquery");
             modelBuilder.Entity<MappedNullableDataTypes>().Property(x => x.SearchVector).HasColumnType("tsvector");
             modelBuilder.Entity<MappedNullableDataTypes>().Property(x => x.RankingNormalization).HasColumnType("integer");
-            modelBuilder.Entity<MappedNullableDataTypes>().Property(x => x.Regconfig).HasColumnType("regconfig");
+            // CockroachDB doesn't support regconfig type
+            // modelBuilder.Entity<MappedNullableDataTypes>().Property(x => x.Regconfig).HasColumnType("regconfig");
         }
 
         public override bool SupportsBinaryKeys

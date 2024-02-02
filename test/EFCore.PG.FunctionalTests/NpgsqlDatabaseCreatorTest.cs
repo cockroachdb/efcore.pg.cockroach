@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using Npgsql.EntityFrameworkCore.CockroachDB.Storage.Internal;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal;
 using Npgsql.EntityFrameworkCore.PostgreSQL.TestUtilities;
 
@@ -585,6 +586,7 @@ public class NpgsqlDatabaseCreatorTest
     private static IServiceProvider CreateServiceProvider()
         => new ServiceCollection()
             .AddEntityFrameworkNpgsql()
+            .AddEntityFrameworkCockroach()
             .AddScoped<IExecutionStrategyFactory, TestNpgsqlExecutionStrategyFactory>()
             .AddScoped<IRelationalDatabaseCreator, TestDatabaseCreator>()
             .BuildServiceProvider();
@@ -609,7 +611,8 @@ public class NpgsqlDatabaseCreatorTest
                     _connectionString, b => b
                         .ApplyConfiguration()
                         .SetPostgresVersion(TestEnvironment.PostgresVersion))
-                .UseInternalServiceProvider(CreateServiceProvider());
+                .UseInternalServiceProvider(CreateServiceProvider())
+                .UseCockroach();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
             => modelBuilder.Entity<Blog>(
@@ -641,7 +644,7 @@ public class NpgsqlDatabaseCreatorTest
         public byte[] AndRow { get; set; }
     }
 
-    public class TestDatabaseCreator : NpgsqlDatabaseCreator
+    public class TestDatabaseCreator : CockroachDatabaseCreator
     {
         public TestDatabaseCreator(
             RelationalDatabaseCreatorDependencies dependencies,

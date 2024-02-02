@@ -411,7 +411,8 @@ WHERE "Id" = @p1;
 
             foreach (var table in tables)
             {
-                builder.AppendLine($"TRUNCATE TABLE {table} RESTART IDENTITY;");
+                builder.AppendLine($"TRUNCATE TABLE {table};");
+                builder.AppendLine($"SELECT setval(pg_get_serial_sequence('{table}', 'Id'), 1, false);");
             }
 
             return builder.ToString();

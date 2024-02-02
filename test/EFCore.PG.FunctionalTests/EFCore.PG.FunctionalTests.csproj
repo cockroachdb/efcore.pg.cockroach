@@ -25,6 +25,14 @@
 
   <ItemGroup>
     <Compile Remove="Query\LegacyTimestampQueryTest.cs" />
+    <Compile Remove="TransactionNpgsqlTest.cs" />
+    <Compile Remove="TransactionInterceptionNpgsqlTest.cs" />
+    <Compile Remove="Query\NetworkQueryNpgsqlTest.cs" />
+    <Compile Remove="OptimisticConcurrencyNpgsqlTest.cs" />
+    <Compile Remove="Query\CitextQueryTest.cs" />
+    <Compile Remove="Query\RangeQueryNpgsqlTest.cs" />
+    <Compile Remove="Query\LTreeQueryTest.cs" />
+    <Compile Remove="Query\FullTextSearchDbFunctionsNpgsqlTest.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -110,6 +110,7 @@ WHERE c."ContactName" ILIKE '!%' ESCAPE '!'
 
     #region Collation
 
+    [SkipForCockroachDb("CockroachDB doesn't support CREATE COLLATION, https://github.com/cockroachdb/cockroach/issues/59567")]
     [MinimumPostgresVersion(12, 0)]
     [PlatformSkipCondition(TestPlatform.Windows, SkipReason = "ICU non-deterministic doesn't seem to work on Windows?")]
     public override async Task Collate_case_insensitive(bool async)
@@ -146,7 +147,8 @@ WHERE c."ContactName" COLLATE "POSIX" = 'maria anders'
 
     #region Others
 
-    [Fact]
+    [SkipForCockroachDb("CockroachDB doesn't support distance operator, https://github.com/cockroachdb/cockroach/issues/57099")]
+    [ConditionalFact]
     public void Distance_with_timestamp()
     {
         using var context = CreateContext();

@@ -102,7 +102,8 @@ WHERE concat_ws('|', c."CustomerID", c."CompanyName", COALESCE(@__param_0, ''), 
 
     #region Regex
 
-    [Theory]
+    [SkipForCockroachDb("https://github.com/cockroachdb/cockroach/issues/108704")]
+    [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public async Task Regex_IsMatch_with_constant_pattern(bool async)
     {
@@ -118,7 +119,8 @@ WHERE c."CompanyName" ~ '(?p)^A'
 """);
     }
 
-    [Theory]
+    [SkipForCockroachDb("https://github.com/cockroachdb/cockroach/issues/108704")]
+    [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public async Task Regex_IsMatch_with_parameter_pattern(bool async)
     {
@@ -138,7 +140,8 @@ WHERE c."CompanyName" ~ ('(?p)' || @__pattern_0)
 """);
     }
 
-    [Theory]
+    [SkipForCockroachDb("https://github.com/cockroachdb/cockroach/issues/108704")]
+    [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public async Task Regex_IsMatchOptionsNone(bool async)
     {
@@ -154,7 +157,8 @@ WHERE c."CompanyName" ~ '(?p)^A'
 """);
     }
 
-    [Theory]
+    [SkipForCockroachDb("https://github.com/cockroachdb/cockroach/issues/108704")]
+    [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public async Task Regex_IsMatch_with_IgnoreCase(bool async)
     {
@@ -170,7 +174,8 @@ WHERE c."CompanyName" ~* '(?p)^a'
 """);
     }
 
-    [Theory]
+    [SkipForCockroachDb("https://github.com/cockroachdb/cockroach/issues/108704")]
+    [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public async Task Regex_IsMatch_with_Multiline(bool async)
     {
@@ -218,7 +223,8 @@ WHERE c."CompanyName" ~* '^a'
 """);
     }
 
-    [Theory]
+    [SkipForCockroachDb("https://github.com/cockroachdb/cockroach/issues/108704")]
+    [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public async Task Regex_IsMatch_with_IgnorePatternWhitespace(bool async)
     {
@@ -541,7 +547,7 @@ GROUP BY c."City"
         var london = results.Single(r => r.City == "London");
 
         Assert.Equal(
-            @"{ ""Around the Horn"" : ""Thomas Hardy"", ""B's Beverages"" : ""Victoria Ashworth"", ""Consolidated Holdings"" : ""Elizabeth Brown"", ""Eastern Connection"" : ""Ann Devon"", ""North/South"" : ""Simon Crowther"", ""Seven Seas Imports"" : ""Hari Kumar"" }",
+            @"{""Around the Horn"": ""Thomas Hardy"", ""B's Beverages"": ""Victoria Ashworth"", ""Consolidated Holdings"": ""Elizabeth Brown"", ""Eastern Connection"": ""Ann Devon"", ""North/South"": ""Simon Crowther"", ""Seven Seas Imports"": ""Hari Kumar""}",
             london.Companies);
 
         AssertSql(
@@ -747,6 +753,7 @@ GROUP BY o."ProductID"
 """);
     }
 
+    [SkipForCockroachDb]
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Other_statistics_functions(bool async)
@@ -832,6 +839,22 @@ GROUP BY o."ProductID"
         => Task.CompletedTask;
 
     #endregion Unsupported
+    
+    [SkipForCockroachDb("https://github.com/cockroachdb/cockroach/issues/108704")]
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public override Task Regex_IsMatch_MethodCall(bool async)
+    {
+        return base.Regex_IsMatch_MethodCall(async);
+    }
+
+    [SkipForCockroachDb("https://github.com/cockroachdb/cockroach/issues/108704")]
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public override Task Regex_IsMatch_MethodCall_constant_input(bool async)
+    {
+        return base.Regex_IsMatch_MethodCall_constant_input(async);
+    }
 
     private void AssertSql(params string[] expected)
         => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);

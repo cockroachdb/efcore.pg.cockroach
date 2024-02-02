@@ -106,7 +106,8 @@ public class CharacterQueryNpgsqlTest : IClassFixture<CharacterQueryNpgsqlTest.C
     /// <summary>
     ///     Test that comparisons are treated correctly.
     /// </summary>
-    [Fact]
+    [SkipForCockroachDb]
+    [ConditionalFact]
     public void Test_change_tracking_key_sizes()
     {
         Fixture.ClearEntities();

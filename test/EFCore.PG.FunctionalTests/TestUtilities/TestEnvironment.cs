@@ -19,6 +19,8 @@ public static class TestEnvironment
             .GetSection("Test:Npgsql");
 
         Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+        
+        AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
     }
 
     private const string DefaultConnectionString = "Server=localhost;Username=npgsql_tests;Password=npgsql_tests;Port=5432";

@@ -9,6 +9,7 @@ public class SequenceEndToEndTest : IDisposable
     {
         var serviceProvider = new ServiceCollection()
             .AddEntityFrameworkNpgsql()
+            .AddEntityFrameworkCockroach()
             .BuildServiceProvider();
 
         using (var context = new BronieContext(serviceProvider, TestStore.Name))
@@ -23,6 +24,7 @@ public class SequenceEndToEndTest : IDisposable
         // the same server sequence.
         serviceProvider = new ServiceCollection()
             .AddEntityFrameworkNpgsql()
+            .AddEntityFrameworkCockroach()
             .BuildServiceProvider();
 
         AddEntities(serviceProvider, TestStore.Name);
@@ -58,6 +60,7 @@ public class SequenceEndToEndTest : IDisposable
     {
         var serviceProvider = new ServiceCollection()
             .AddEntityFrameworkNpgsql()
+            .AddEntityFrameworkCockroach()
             .BuildServiceProvider();
 
         var dbOne = TestStore.Name + "1";
@@ -78,6 +81,7 @@ public class SequenceEndToEndTest : IDisposable
         // the same server sequence.
         serviceProvider = new ServiceCollection()
             .AddEntityFrameworkNpgsql()
+            .AddEntityFrameworkCockroach()
             .BuildServiceProvider();
 
         AddEntitiesToMultipleContexts(serviceProvider, dbOne, dbTwo);
@@ -125,6 +129,7 @@ public class SequenceEndToEndTest : IDisposable
     {
         var serviceProvider = new ServiceCollection()
             .AddEntityFrameworkNpgsql()
+            .AddEntityFrameworkCockroach()
             .BuildServiceProvider();
 
         await using (var context = new BronieContext(serviceProvider, TestStore.Name))
@@ -139,6 +144,7 @@ public class SequenceEndToEndTest : IDisposable
         // the same server sequence.
         serviceProvider = new ServiceCollection()
             .AddEntityFrameworkNpgsql()
+            .AddEntityFrameworkCockroach()
             .BuildServiceProvider();
 
         await AddEntitiesAsync(serviceProvider, TestStore.Name);
@@ -174,6 +180,7 @@ public class SequenceEndToEndTest : IDisposable
     {
         var serviceProvider = new ServiceCollection()
             .AddEntityFrameworkNpgsql()
+            .AddEntityFrameworkCockroach()
             .BuildServiceProvider();
 
         await using (var context = new BronieContext(serviceProvider, TestStore.Name))
@@ -214,6 +221,7 @@ public class SequenceEndToEndTest : IDisposable
     {
         var serviceProvider = new ServiceCollection()
             .AddEntityFrameworkNpgsql()
+            .AddEntityFrameworkCockroach()
             .BuildServiceProvider();
 
         using (var context = new BronieContext(serviceProvider, TestStore.Name))
@@ -228,6 +236,7 @@ public class SequenceEndToEndTest : IDisposable
         // the same server sequence.
         serviceProvider = new ServiceCollection()
             .AddEntityFrameworkNpgsql()
+            .AddEntityFrameworkCockroach()
             .BuildServiceProvider();
 
         AddEntitiesWithIds(serviceProvider, 4, TestStore.Name);
@@ -279,7 +288,8 @@ public class SequenceEndToEndTest : IDisposable
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
                 .UseInternalServiceProvider(_serviceProvider)
-                .UseNpgsql(NpgsqlTestStore.CreateConnectionString(_databaseName), b => b.ApplyConfiguration());
+                .UseNpgsql(NpgsqlTestStore.CreateConnectionString(_databaseName), b => b.ApplyConfiguration())
+                .UseCockroach();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
             => modelBuilder.Entity<Pegasus>(
@@ -301,6 +311,7 @@ public class SequenceEndToEndTest : IDisposable
     {
         var serviceProvider = new ServiceCollection()
             .AddEntityFrameworkNpgsql()
+            .AddEntityFrameworkCockroach()
             .BuildServiceProvider();
 
         using (var context = new NullableBronieContext(serviceProvider, TestStore.Name, true))
@@ -329,6 +340,7 @@ public class SequenceEndToEndTest : IDisposable
     {
         var serviceProvider = new ServiceCollection()
             .AddEntityFrameworkNpgsql()
+            .AddEntityFrameworkCockroach()
             .BuildServiceProvider();
 
         using (var context = new NullableBronieContext(serviceProvider, TestStore.Name, false))
@@ -384,7 +396,8 @@ public class SequenceEndToEndTest : IDisposable
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
                 .UseInternalServiceProvider(_serviceProvider)
-                .UseNpgsql(NpgsqlTestStore.CreateConnectionString(_databaseName), b => b.ApplyConfiguration());
+                .UseNpgsql(NpgsqlTestStore.CreateConnectionString(_databaseName), b => b.ApplyConfiguration())
+                .UseCockroach();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
             => modelBuilder.Entity<Unicon>(

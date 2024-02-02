@@ -109,7 +109,8 @@ public class NpgsqlTestStore : RelationalTestStore
                 .CommandTimeout(CommandTimeout)
                 // The tests are written with the assumption that NULLs are sorted first (SQL Server and .NET behavior), but PostgreSQL
                 // sorts NULLs last by default. This configures the provider to emit NULLS FIRST.
-                .ReverseNullOrdering());
+                .ReverseNullOrdering())
+            .UseCockroach();
 
     private static string GetScratchDbName()
     {
@@ -216,6 +217,7 @@ public class NpgsqlTestStore : RelationalTestStore
                     .AddEntityFrameworkNpgsql()
                     .AddEntityFrameworkCockroach()
                     .BuildServiceProvider())
+            .UseCockroach()
             .Options;
 
         using (var context = new DbContext(options))
@@ -255,10 +257,7 @@ public class NpgsqlTestStore : RelationalTestStore
     // TODO: Pre-9.2 PG has column name procid instead of pid
     private static string GetDisconnectDatabaseSql(string name)
         => $@"
-REVOKE CONNECT ON DATABASE ""{name}"" FROM PUBLIC;
-SELECT pg_terminate_backend (pg_stat_activity.pid)
-   FROM pg_stat_activity
-   WHERE datname = '{name}'";
+REVOKE CONNECT ON DATABASE ""{name}"" FROM PUBLIC;";
 
     private static string GetDropDatabaseSql(string name)
         => $@"DROP DATABASE ""{name}""";

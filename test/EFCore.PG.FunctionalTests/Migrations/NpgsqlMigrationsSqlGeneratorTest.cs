@@ -546,11 +546,8 @@ DROP SEQUENCE "Person_Id_old_seq";
 
         AssertSql(
             """
-    IF NOT EXISTS(SELECT 1 FROM pg_namespace WHERE nspname = 'some_schema') THEN
-        CREATE SCHEMA some_schema;
-    END IF;
-
-""");
+            CREATE SCHEMA IF NOT EXISTS some_schema;
+            """);
     }
 
     #region CockroachDB interleave-in-parent

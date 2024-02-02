@@ -1,6 +1,7 @@
 ﻿using System.Data.Common;
 using System.Text;
 using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
+using Npgsql.EntityFrameworkCore.CockroachDB.Scaffolding.Internal;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Diagnostics.Internal;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Scaffolding.Internal;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal;
@@ -17,7 +18,7 @@ public class NpgsqlDatabaseCleaner : RelationalDatabaseCleaner
     }
 
     protected override IDatabaseModelFactory CreateDatabaseModelFactory(ILoggerFactory loggerFactory)
-        => new NpgsqlDatabaseModelFactory(
+        => new CockroachDatabaseModelFactory(
             new DiagnosticsLogger<DbLoggerCategory.Scaffolding>(
                 loggerFactory,
                 new LoggingOptions(),
@@ -122,7 +123,7 @@ WHERE typtype IN ('r', 'e') AND nspname <> 'pg_catalog'";
     private void DropFunctions(NpgsqlConnection conn)
     {
         const string getUserDefinedFunctions = @"
-SELECT 'DROP ROUTINE ""' || nspname || '"".""' || proname || '""(' || oidvectortypes(proargtypes) || ');' FROM pg_proc
+SELECT 'DROP FUNCTION ""' || nspname || '"".""' || proname || '""(' || oidvectortypes(proargtypes) || ');' FROM pg_proc
 JOIN pg_namespace AS ns ON ns.oid = pg_proc.pronamespace
 WHERE
         nspname NOT IN ('pg_catalog', 'information_schema', 'crdb_internal', 'pg_extension') AND

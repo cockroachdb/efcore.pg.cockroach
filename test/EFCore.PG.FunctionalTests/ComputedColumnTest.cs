@@ -10,6 +10,7 @@ public class ComputedColumnTest : IDisposable
     {
         var serviceProvider = new ServiceCollection()
             .AddEntityFrameworkNpgsql()
+            .AddEntityFrameworkCockroach()
             .BuildServiceProvider();
 
         using var context = new Context(serviceProvider, TestStore.Name);
@@ -34,6 +35,7 @@ public class ComputedColumnTest : IDisposable
     {
         var serviceProvider = new ServiceCollection()
             .AddEntityFrameworkNpgsql()
+            .AddEntityFrameworkCockroach()
             .BuildServiceProvider();
 
         using var context = new Context(serviceProvider, TestStore.Name);
@@ -63,7 +65,8 @@ public class ComputedColumnTest : IDisposable
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
                 .UseNpgsql(NpgsqlTestStore.CreateConnectionString(_databaseName), b => b.ApplyConfiguration())
-                .UseInternalServiceProvider(_serviceProvider);
+                .UseInternalServiceProvider(_serviceProvider)
+                .UseCockroach();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -119,7 +122,8 @@ public class ComputedColumnTest : IDisposable
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
                 .UseNpgsql(NpgsqlTestStore.CreateConnectionString(_databaseName), b => b.ApplyConfiguration())
-                .UseInternalServiceProvider(_serviceProvider);
+                .UseInternalServiceProvider(_serviceProvider)
+                .UseCockroach();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
             => modelBuilder.Entity<EnumItem>()
@@ -132,6 +136,7 @@ public class ComputedColumnTest : IDisposable
     {
         var serviceProvider = new ServiceCollection()
             .AddEntityFrameworkNpgsql()
+            .AddEntityFrameworkCockroach()
             .BuildServiceProvider();
 
         using var context = new NullableContext(serviceProvider, TestStore.Name);

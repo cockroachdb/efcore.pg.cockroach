@@ -5,7 +5,8 @@ namespace Npgsql.EntityFrameworkCore.PostgreSQL.Metadata.Conventions;
 
 public class NpgsqlPostgresModelFinalizingConventionTest
 {
-    [Fact]
+    [SkipForCockroachDb("CockroachDB doesn't support xmin")]
+    [ConditionalFact]
     public void RowVersion_properties_get_mapped_to_xmin()
     {
         var modelBuilder = NpgsqlTestHelpers.Instance.CreateConventionBuilder();

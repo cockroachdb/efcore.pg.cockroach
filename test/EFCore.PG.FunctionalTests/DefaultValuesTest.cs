@@ -8,6 +8,7 @@ public class DefaultValuesTest : IDisposable
 {
     private readonly IServiceProvider _serviceProvider = new ServiceCollection()
         .AddEntityFrameworkNpgsql()
+        .AddEntityFrameworkCockroach()
         .BuildServiceProvider();
 
     [Fact]
@@ -62,7 +63,8 @@ public class DefaultValuesTest : IDisposable
                 .UseNpgsql(
                     NpgsqlTestStore.CreateConnectionString(_databaseName),
                     o => o.SetPostgresVersion(TestEnvironment.PostgresVersion))
-                .UseInternalServiceProvider(_serviceProvider);
+                .UseInternalServiceProvider(_serviceProvider)
+                .UseCockroach();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
             => modelBuilder.Entity<KettleChips>()

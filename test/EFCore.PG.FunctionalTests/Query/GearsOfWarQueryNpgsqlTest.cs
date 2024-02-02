@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
+using Npgsql.EntityFrameworkCore.PostgreSQL.TestUtilities;
 
 namespace Npgsql.EntityFrameworkCore.PostgreSQL.Query;
 
@@ -787,6 +788,12 @@ WHERE m."Time"::interval = INTERVAL '15:30:10'
 
     #endregion TimeOnly
 
+    [SkipForCockroachDb("https://github.com/cockroachdb/cockroach/issues/110785")]
+    public override Task Select_null_propagation_negative4(bool async)
+    {
+        return base.Select_null_propagation_negative4(async);
+    }
+    
     private void AssertSql(params string[] expected)
         => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 }

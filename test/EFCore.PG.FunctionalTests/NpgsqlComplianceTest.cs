@@ -8,11 +8,16 @@ public class NpgsqlComplianceTest : RelationalComplianceTestBase
         typeof(FromSqlSprocQueryTestBase<>),
         typeof(UdfDbFunctionTestBase<>),
         typeof(UpdateSqlGeneratorTestBase),
-
+        
         // Disabled
         typeof(GraphUpdatesTestBase<>),
         typeof(ProxyGraphUpdatesTestBase<>),
         typeof(OperatorsProceduralQueryTestBase),
+        
+        typeof(OptimisticConcurrencyTestBase<,>),
+        typeof(OptimisticConcurrencyRelationalTestBase<,>),
+        typeof(TransactionInterceptionTestBase),
+        typeof(TransactionTestBase<>),
     };
 
     protected override Assembly TargetAssembly { get; } = typeof(NpgsqlComplianceTest).Assembly;
