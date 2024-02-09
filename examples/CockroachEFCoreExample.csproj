@@ -21,4 +21,8 @@
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\src\EFCore.PG.CockroachDB\EFCore.PG.CockroachDB.csproj" />
+    </ItemGroup>
+
 </Project>
