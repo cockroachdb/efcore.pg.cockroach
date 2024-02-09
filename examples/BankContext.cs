@@ -24,7 +24,7 @@ public class BankContext(string connectionString) : DbContext
     public DbSet<Account> Accounts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql(_connectionString);
+        => optionsBuilder.UseNpgsql(_connectionString).UseCockroach();
 }
 
 public class Account
