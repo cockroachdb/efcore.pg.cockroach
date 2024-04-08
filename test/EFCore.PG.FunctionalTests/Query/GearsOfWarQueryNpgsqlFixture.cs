@@ -41,8 +41,12 @@ public class GearsOfWarQueryNpgsqlFixture : GearsOfWarQueryRelationalFixture
             // Also chop sub-microsecond precision which PostgreSQL does not support.
             foreach (var mission in _expectedData.Missions)
             {
-                mission.Timeline = new DateTimeOffset(
-                    mission.Timeline.Ticks - (mission.Timeline.Ticks % (TimeSpan.TicksPerMillisecond / 1000)), TimeSpan.Zero);
+                long newTicks = mission.Timeline.Ticks - (mission.Timeline.Ticks % (TimeSpan.TicksPerMillisecond / 1000));
+                // Ensure the newTicks are within the DateTime valid range
+                if (newTicks < DateTime.MinValue.Ticks) newTicks = DateTime.MinValue.Ticks;
+                if (newTicks > DateTime.MaxValue.Ticks) newTicks = DateTime.MaxValue.Ticks;
+
+                mission.Timeline = new DateTimeOffset(newTicks, TimeSpan.Zero);
             }
         }
 
@@ -68,8 +72,12 @@ public class GearsOfWarQueryNpgsqlFixture : GearsOfWarQueryRelationalFixture
 
         foreach (var mission in missions)
         {
-            mission.Timeline = new DateTimeOffset(
-                mission.Timeline.Ticks - (mission.Timeline.Ticks % (TimeSpan.TicksPerMillisecond / 1000)), TimeSpan.Zero);
+            long newTicks = mission.Timeline.Ticks - (mission.Timeline.Ticks % (TimeSpan.TicksPerMillisecond / 1000));
+            // Ensure the newTicks are within the DateTime valid range
+            if (newTicks < DateTime.MinValue.Ticks) newTicks = DateTime.MinValue.Ticks;
+            if (newTicks > DateTime.MaxValue.Ticks) newTicks = DateTime.MaxValue.Ticks;
+
+            mission.Timeline = new DateTimeOffset(newTicks, TimeSpan.Zero);
         }
 
         GearsOfWarData.WireUp(
