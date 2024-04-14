@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>CockroachDB-Provider</id>
+    <version>0.0.1</version>
+    <authors>The Cockroach Authors</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">Apache 2.0</license>
+    <projectUrl>https://github.com/cockroachdb/efcore.pg.cockroach</projectUrl>
+    <description>CockroacheDB EFCore Provider</description>
+    <releaseNotes>This is the initial release of the CockroachDB EFCore Provider Beta.</releaseNotes>
+    <copyright>Copyright CockroachLabs, Inc.</copyright>
+  </metadata>
+</package>
