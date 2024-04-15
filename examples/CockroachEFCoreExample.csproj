@@ -16,13 +16,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="CockroachDB.EFCore.Provider" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime" />
-    </ItemGroup>
-
-
-    <ItemGroup>
-      <ProjectReference Include="..\src\EFCore.PG.CockroachDB\EFCore.PG.CockroachDB.csproj" />
     </ItemGroup>
 </Project>
