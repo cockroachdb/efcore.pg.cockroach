@@ -1,4 +1,7 @@
-# Cockroach extension for Npgsql.EntityFrameworkCore.PostgreSQL
+# CockroachDB extension for Npgsql.EntityFrameworkCore.PostgreSQL
+
+This provider is currently in beta. For a list of known limitations see docs/known-limitations.md
+This package should be consumed via [nuget](https://www.nuget.org/packages/CockroachDB.EFCore.Provider).
 
 Npgsql.EntityFrameworkCore.CockroachDB is an extension library to add compatibility for CockroachDB to the open source EF Core provider for PostgreSQL. It allows you to interact with CockroachDB via the most widely-used .NET O/RM from Microsoft, and use familiar LINQ syntax to express queries. It's built on top of [Npgsql.EntityFrameworkCore.PostgreSQL](https://github.com/npgsql/efcore.pg).
 
