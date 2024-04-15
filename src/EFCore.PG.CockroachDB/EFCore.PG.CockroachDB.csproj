@@ -8,7 +8,7 @@
         <RootNamespace>Npgsql.EntityFrameworkCore.CockroachDB</RootNamespace>
         <IsPackable>true</IsPackable>
         <PackageId>CockroachDB.EFCore.Provider</PackageId>
-        <Version>0.0.1</Version>
+        <Version>0.1.0</Version>
     </PropertyGroup>
 
     <ItemGroup>
